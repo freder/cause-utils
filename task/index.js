@@ -1,5 +1,6 @@
 'use strict';
 
+var debug = require('debug')('cause-utils:task');
 var _ = require('lodash');
 
 
