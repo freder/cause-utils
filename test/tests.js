@@ -110,6 +110,6 @@ describe('parsing', function() {
 });
 
 
-describe('formattingng', function() {
+describe('formatting', function() {
 	// TODO: write tests
 });

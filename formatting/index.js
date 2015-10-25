@@ -5,23 +5,6 @@ var numeral = require('numeral');
 var sf = require('sf');
 
 
-function message_vars(task, input, step, prev_step) {
-	// wrap everything in an object, so that it can
-	// easily be referenced from within string templates.
-	return {
-		task: task,
-		input: input,
-		step: step,
-		prev_step: prev_step,
-		// additional formatting functions:
-		format: {
-			list: function(l) { return l.join('\n'); },
-			money: money
-		}
-	};
-}
-
-
 function money(x) {
 	return numeral(x).format('0.00');
 }
@@ -78,6 +61,5 @@ module.exports = {
 	delta: delta,
 	price: price,
 	price_delta: price_delta,
-	money: money,
-	message_vars: message_vars,
+	money: money
 };
