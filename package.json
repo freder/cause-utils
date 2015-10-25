@@ -1,0 +1,25 @@
+{
+  "name": "cause-utils",
+  "version": "0.0.0",
+  "description": "utility functions for ’cause",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --watch"
+  },
+  "author": "freder.code@gmail.com",
+  "dependencies": {
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freder/cause-utils.git"
+  },
+  "keywords": [
+    "cause"
+  ],
+  "bugs": {
+    "url": "https://github.com/freder/cause-utils/issues"
+  },
+  "homepage": "https://github.com/freder/cause-utils"
+}
