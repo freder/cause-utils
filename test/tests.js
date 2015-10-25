@@ -7,6 +7,7 @@ var cheerio = require('cheerio');
 var taskUtils = require('../task/index.js');
 var scrapingUtils = require('../scraping/index.js');
 var parsingUtils = require('../parsing/index.js');
+var formattingUtils = require('../formatting/index.js');
 
 
 describe('task', function() {
@@ -106,4 +107,9 @@ describe('parsing', function() {
 			assert.throws(function() { parsingUtils.time('five minutes'); });
 		});
 	});
+});
+
+
+describe('formattingng', function() {
+	// TODO: write tests
 });
