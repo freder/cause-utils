@@ -31,11 +31,11 @@ function requestDefaults() {
 	var defaults = {};
 
 	try {
-		var user_agent = ua.getRandom(function(agent) {
+		var userAgent = ua.getRandom(function(agent) {
 			return agent.browserName.toLowerCase() === 'chrome'
 				&& parseFloat(agent.browserVersion) >= 30;
 		});
-		defaults.headers = { 'User-Agent': user_agent };
+		defaults.headers = { 'User-Agent': userAgent };
 	} catch (e) {
 		debug('creating random user agent failed');
 		return defaults;
