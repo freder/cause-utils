@@ -3,9 +3,12 @@
 var assert = require('assert');
 var _ = require('lodash');
 var cheerio = require('cheerio');
+var FeedParser = require('feedparser');
+var fs = require('fs');
 
 var taskUtils = require('../task/index.js');
 var scrapingUtils = require('../scraping/index.js');
+var feedUtils = require('../feed/index.js');
 var parsingUtils = require('../parsing/index.js');
 var formattingUtils = require('../formatting/index.js');
 
@@ -105,6 +108,31 @@ describe('parsing', function() {
 		it('should throw errors', function() {
 			assert.throws(function() { parsingUtils.time('12'); });
 			assert.throws(function() { parsingUtils.time('five minutes'); });
+		});
+	});
+});
+
+
+describe('feed', function() {
+	describe('.process_feed()', function() {
+		it('should work', function(done) {
+			var feedparser = new FeedParser();
+			fs.createReadStream('test/files/feed.xml')
+				.pipe(feedparser);
+
+			feedUtils.process_feed(
+				feedparser, {
+					seen_guids: ['1111'],
+					seen_pubdate: undefined
+				},
+				function(err, result) {
+					if (err) { throw err; }
+					assert(result.items.length === 3);
+					assert(result.new_items.length === 2);
+					assert(result.new_items.indexOf('1111') === -1);
+					done();
+				}
+			);
 		});
 	});
 });
