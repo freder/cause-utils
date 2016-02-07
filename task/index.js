@@ -1,18 +1,18 @@
 'use strict';
 
-var debug = require('debug')('cause-utils:task');
-var _ = require('lodash');
+const debug = require('debug')('cause-utils:task');
+const _ = require('lodash');
 
 
-var flowDecisionDefaults = module.exports.flowDecisionDefaults = {
+const flowDecisionDefaults = module.exports.flowDecisionDefaults = {
 	'if': true,
 	'else': true,
 	'always': true // always true
 };
 
-var flowDecision = module.exports.flowDecision =
+const flowDecision = module.exports.flowDecision =
 function(decision) {
-	var decisionObj;
+	let decisionObj;
 
 	if (_.isBoolean(decision)) {
 		decisionObj = {

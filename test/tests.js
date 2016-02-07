@@ -1,28 +1,28 @@
 'use strict';
 
-var assert = require('assert');
-var _ = require('lodash');
-var cheerio = require('cheerio');
-var FeedParser = require('feedparser');
-var fs = require('fs');
+const assert = require('assert');
+const _ = require('lodash');
+const cheerio = require('cheerio');
+const FeedParser = require('feedparser');
+const fs = require('fs');
 
-var taskUtils = require('../task/index.js');
-var scrapingUtils = require('../scraping/index.js');
-var feedUtils = require('../feed/index.js');
-var parsingUtils = require('../parsing/index.js');
-var formattingUtils = require('../formatting/index.js');
+const taskUtils = require('../task/index.js');
+const scrapingUtils = require('../scraping/index.js');
+const feedUtils = require('../feed/index.js');
+const parsingUtils = require('../parsing/index.js');
+const formattingUtils = require('../formatting/index.js');
 
 
 describe('task', function() {
 	describe('.flowDecision()', function() {
 		it('should work with boolean argument', function() {
-			var decision = taskUtils.flowDecision(false);
+			const decision = taskUtils.flowDecision(false);
 			assert(decision['if'] === false);
 			assert(decision['else'] === true);
 		});
 
 		it('should work with object argument', function() {
-			var decision = taskUtils.flowDecision({
+			const decision = taskUtils.flowDecision({
 				'if': false
 			});
 			assert(decision['if'] === false);
@@ -30,7 +30,7 @@ describe('task', function() {
 		});
 
 		it('should work with undefined/null argument', function() {
-			var decision = taskUtils.flowDecision(null);
+			let decision = taskUtils.flowDecision(null);
 			assert(decision['if'] === false);
 			assert(decision['else'] === false);
 
@@ -40,7 +40,7 @@ describe('task', function() {
 		});
 
 		it('`always` should always be true', function() {
-			var decision = taskUtils.flowDecision({ 'always': false });
+			const decision = taskUtils.flowDecision({ 'always': false });
 			assert(decision['always'] === true);
 		});
 
@@ -61,13 +61,13 @@ describe('task', function() {
 describe('scraping', function() {
 	describe('.query()', function() {
 		it('should work with css and jquery', function() {
-			var html = ' \
+			const html = ' \
 				<div id="container"> \
 					<div class="div">div</div> \
 					<span>span</span> \
 				</div>';
-			var $ = cheerio.load(html);
-			var query, $result;
+			const $ = cheerio.load(html);
+			let query, $result;
 
 			query = '$("#container div").first()';
 			$result = scrapingUtils.query('jquery', query, html);
@@ -78,16 +78,17 @@ describe('scraping', function() {
 			assert($result.text().trim() == 'span');
 
 			query = '#notfound';
-			var result = scrapingUtils.query('css', query, html);
-			assert(result.length === 0);
+			$result = scrapingUtils.query('css', query, html);
+			assert($result.length === 0);
 
-			assert(scrapingUtils.query('never_heard_of_this', query, html) === null);
+			$result = scrapingUtils.query('never_heard_of_this', query, html);
+			assert($result === null);
 		});
 	});
 
 	describe('.requestDefaults()', function() {
 		it('should set a user agent', function() {
-			var opts = scrapingUtils.requestDefaults();
+			const opts = scrapingUtils.requestDefaults();
 			assert(opts.headers !== undefined && opts.headers['User-Agent'] !== undefined);
 		});
 	});
@@ -97,7 +98,7 @@ describe('scraping', function() {
 describe('parsing', function() {
 	describe('.time()', function() {
 		it('should parse time', function() {
-			var parsed;
+			let parsed;
 			parsed = parsingUtils.time('12 minutes');
 			assert(parsed.minutes === 12);
 
@@ -106,8 +107,12 @@ describe('parsing', function() {
 		});
 
 		it('should throw errors', function() {
-			assert.throws(function() { parsingUtils.time('12'); });
-			assert.throws(function() { parsingUtils.time('five minutes'); });
+			assert.throws(() => {
+				parsingUtils.time('12');
+			});
+			assert.throws(() => {
+				parsingUtils.time('five minutes');
+			});
 		});
 	});
 });
@@ -116,7 +121,7 @@ describe('parsing', function() {
 describe('feed', function() {
 	describe('.process_feed()', function() {
 		it('should work', function(done) {
-			var feedparser = new FeedParser();
+			const feedparser = new FeedParser();
 			fs.createReadStream('test/files/feed.xml')
 				.pipe(feedparser);
 
