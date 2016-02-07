@@ -1,8 +1,8 @@
 'use strict';
 
-var chalk = require('chalk');
-var numeral = require('numeral');
-var sf = require('sf');
+const chalk = require('chalk');
+const numeral = require('numeral');
+const sf = require('sf');
 
 
 function money(x) {
@@ -43,23 +43,23 @@ function delta(d) {
 }
 
 
-function price_delta(price, prev_price, task) {
-	var d = delta(price - prev_price);
+function priceDelta(price, prevPrice, task) {
+	var d = delta(price - prevPrice);
 	var message = chalk.green(money(price));
-	return sf('{0} | {1}', cli_msg(task.name, d), message);
+	return sf('{0} | {1}', cliMsg(task.name, d), message);
 }
 
 
-function cli_msg(prefix, msg) {
+function cliMsg(prefix, msg) {
 	msg = msg || '';
 	return sf('{0} {1}', chalk.bgBlue(prefix), msg);
 }
 
 
 module.exports = {
-	cli_msg: cli_msg,
+	cliMsg: cliMsg,
 	delta: delta,
 	price: price,
-	price_delta: price_delta,
+	priceDelta: priceDelta,
 	money: money
 };
