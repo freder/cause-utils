@@ -82,11 +82,11 @@ describe('scraping', function() {
 
 			query = '$("#container div").first()';
 			$result = scrapingUtils.query('jquery', query, html);
-			assert($result.text().trim() == 'div');
+			assert($result.text().trim() === 'div');
 
 			query = '#container span';
 			$result = scrapingUtils.query('css', query, html);
-			assert($result.text().trim() == 'span');
+			assert($result.text().trim() === 'span');
 
 			query = '#notfound';
 			$result = scrapingUtils.query('css', query, html);
