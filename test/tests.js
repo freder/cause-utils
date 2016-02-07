@@ -54,6 +54,17 @@ describe('task', function() {
 			assert(taskUtils.flowDecisionDefaults['else'] === true);
 			assert(taskUtils.flowDecisionDefaults['always'] === true);
 		});
+
+		it('should throw error on wrong argument type', function() {
+			const decision = [
+				{ 'if': false },
+				{ 'else': false },
+				{ 'always': false }
+			];
+			assert.throws(() => {
+				taskUtils.flowDecision(decision);
+			});
+		});
 	});
 });
 

@@ -24,11 +24,16 @@ function(decision) {
 			'if': false,
 			'else': false
 		};
-	} else if (_.isObject(decision)) {
+	} else if (_.isObject(decision) && !_.isArray(decision)) {
 		decisionObj = decision;
 	} else {
-		throw new Error('invalid argument');
+		throw new Error('invalid argument type');
 	}
 
-	return _.merge({}, flowDecisionDefaults, decisionObj, { 'always': true });
+	return _.merge(
+		{},
+		flowDecisionDefaults,
+		decisionObj,
+		{ 'always': true }
+	);
 };
