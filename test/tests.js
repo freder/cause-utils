@@ -6,6 +6,8 @@ const cheerio = require('cheerio');
 const FeedParser = require('feedparser');
 const fs = require('fs');
 
+const util = require('./util.js');
+
 const taskUtils = require('../task/index.js');
 const scrapingUtils = require('../scraping/index.js');
 const feedUtils = require('../feed/index.js');
@@ -13,15 +15,15 @@ const parsingUtils = require('../parsing/index.js');
 const formattingUtils = require('../formatting/index.js');
 
 
-describe('task', function() {
-	describe('.flowDecision()', function() {
-		it('should work with boolean argument', function() {
+describe(util.f1('task'), function() {
+	describe(util.f2('.flowDecision()'), function() {
+		it(util.f3('should work with boolean argument'), function() {
 			const decision = taskUtils.flowDecision(false);
 			assert(decision['if'] === false);
 			assert(decision['else'] === true);
 		});
 
-		it('should work with object argument', function() {
+		it(util.f3('should work with object argument'), function() {
 			const decision = taskUtils.flowDecision({
 				'if': false
 			});
@@ -29,7 +31,7 @@ describe('task', function() {
 			assert(decision['else'] === true);
 		});
 
-		it('should work with undefined/null argument', function() {
+		it(util.f3('should work with undefined/null argument'), function() {
 			let decision = taskUtils.flowDecision(null);
 			assert(decision['if'] === false);
 			assert(decision['else'] === false);
@@ -39,12 +41,12 @@ describe('task', function() {
 			assert(decision['else'] === false);
 		});
 
-		it('`always` should always be true', function() {
+		it(util.f3('`always` should always be true'), function() {
 			const decision = taskUtils.flowDecision({ 'always': false });
 			assert(decision['always'] === true);
 		});
 
-		it('should leave defaults untouched', function() {
+		it(util.f3('should leave defaults untouched'), function() {
 			taskUtils.flowDecision({
 				'if': false,
 				'else': false,
@@ -55,7 +57,7 @@ describe('task', function() {
 			assert(taskUtils.flowDecisionDefaults['always'] === true);
 		});
 
-		it('should throw error on wrong argument type', function() {
+		it(util.f3('should throw error on wrong argument type'), function() {
 			const decision = [
 				{ 'if': false },
 				{ 'else': false },
@@ -69,9 +71,9 @@ describe('task', function() {
 });
 
 
-describe('scraping', function() {
-	describe('.query()', function() {
-		it('should work with css and jquery', function() {
+describe(util.f1('scraping'), function() {
+	describe(util.f2('.query()'), function() {
+		it(util.f3('should work with css and jquery'), function() {
 			const html = ' \
 				<div id="container"> \
 					<div class="div">div</div> \
@@ -97,8 +99,8 @@ describe('scraping', function() {
 		});
 	});
 
-	describe('.requestDefaults()', function() {
-		it('should set a user agent', function() {
+	describe(util.f2('.requestDefaults()'), function() {
+		it(util.f3('should set a user agent'), function() {
 			const opts = scrapingUtils.requestDefaults();
 			assert(opts.headers !== undefined && opts.headers['User-Agent'] !== undefined);
 		});
@@ -106,9 +108,9 @@ describe('scraping', function() {
 });
 
 
-describe('parsing', function() {
-	describe('.time()', function() {
-		it('should parse time', function() {
+describe(util.f1('parsing'), function() {
+	describe(util.f2('.time()'), function() {
+		it(util.f3('should parse time'), function() {
 			let parsed;
 			parsed = parsingUtils.time('12 minutes');
 			assert(parsed.minutes === 12);
@@ -117,7 +119,7 @@ describe('parsing', function() {
 			assert(parsed.minutes === 12);
 		});
 
-		it('should throw errors', function() {
+		it(util.f3('should throw errors'), function() {
 			assert.throws(() => {
 				parsingUtils.time('12');
 			});
@@ -129,9 +131,9 @@ describe('parsing', function() {
 });
 
 
-describe('feed', function() {
-	describe('.process_feed()', function() {
-		it('should work', function(done) {
+describe(util.f1('feed'), function() {
+	describe(util.f2('.process_feed()'), function() {
+		it(util.f3('should work'), function(done) {
 			const feedparser = new FeedParser();
 			fs.createReadStream('test/files/feed.xml')
 				.pipe(feedparser);
@@ -154,6 +156,6 @@ describe('feed', function() {
 });
 
 
-describe('formatting', function() {
+describe(util.f1('formatting'), function() {
 	// TODO: write tests
 });
