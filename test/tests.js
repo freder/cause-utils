@@ -8,7 +8,6 @@ const fs = require('fs');
 
 const util = require('./util.js');
 
-const taskUtils = require('../task/index.js');
 const scrapingUtils = require('../scraping/index.js');
 const feedUtils = require('../feed/index.js');
 const parsingUtils = require('../parsing/index.js');
