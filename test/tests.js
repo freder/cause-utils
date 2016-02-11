@@ -15,62 +15,6 @@ const parsingUtils = require('../parsing/index.js');
 const formattingUtils = require('../formatting/index.js');
 
 
-describe(util.f1('task'), function() {
-	describe(util.f2('.flowDecision()'), function() {
-		it(util.f3('should work with boolean argument'), function() {
-			const decision = taskUtils.flowDecision(false);
-			assert(decision['if'] === false);
-			assert(decision['else'] === true);
-		});
-
-		it(util.f3('should work with object argument'), function() {
-			const decision = taskUtils.flowDecision({
-				'if': false
-			});
-			assert(decision['if'] === false);
-			assert(decision['else'] === true);
-		});
-
-		it(util.f3('should work with undefined/null argument'), function() {
-			let decision = taskUtils.flowDecision(null);
-			assert(decision['if'] === false);
-			assert(decision['else'] === false);
-
-			decision = taskUtils.flowDecision(undefined);
-			assert(decision['if'] === false);
-			assert(decision['else'] === false);
-		});
-
-		it(util.f3('`always` should always be true'), function() {
-			const decision = taskUtils.flowDecision({ 'always': false });
-			assert(decision['always'] === true);
-		});
-
-		it(util.f3('should leave defaults untouched'), function() {
-			taskUtils.flowDecision({
-				'if': false,
-				'else': false,
-				'always': false
-			});
-			assert(taskUtils.flowDecisionDefaults['if'] === true);
-			assert(taskUtils.flowDecisionDefaults['else'] === true);
-			assert(taskUtils.flowDecisionDefaults['always'] === true);
-		});
-
-		it(util.f3('should throw error on wrong argument type'), function() {
-			const decision = [
-				{ 'if': false },
-				{ 'else': false },
-				{ 'always': false }
-			];
-			assert.throws(() => {
-				taskUtils.flowDecision(decision);
-			});
-		});
-	});
-});
-
-
 describe(util.f1('scraping'), function() {
 	describe(util.f2('.query()'), function() {
 		it(util.f3('should work with css and jquery'), function() {
