@@ -6,7 +6,7 @@
   "license": "CC-BY-NC-SA-4.0",
   "scripts": {
     "test": "mocha --watch",
-    "lint": "eslint index.js test/*.js task/*.js scraping/*.js feed/*.js parsing/*.js formatting/*.js "
+    "lint": "eslint index.js test/*.js scraping/*.js feed/*.js parsing/*.js formatting/*.js "
   },
   "author": "freder.code@gmail.com",
   "dependencies": {

@@ -14,9 +14,9 @@ const parsingUtils = require('../parsing/index.js');
 const formattingUtils = require('../formatting/index.js');
 
 
-describe(util.f1('scraping'), function() {
-	describe(util.f2('.query()'), function() {
-		it(util.f3('should work with css and jquery'), function() {
+describe(util.f1('scraping'), () => {
+	describe(util.f2('.query()'), () => {
+		it(util.f3('should work with css and jquery'), () => {
 			const html = ' \
 				<div id="container"> \
 					<div class="div">div</div> \
@@ -42,8 +42,8 @@ describe(util.f1('scraping'), function() {
 		});
 	});
 
-	describe(util.f2('.requestDefaults()'), function() {
-		it(util.f3('should set a user agent'), function() {
+	describe(util.f2('.requestDefaults()'), () => {
+		it(util.f3('should set a user agent'), () => {
 			const opts = scrapingUtils.requestDefaults();
 			assert(opts.headers !== undefined && opts.headers['User-Agent'] !== undefined);
 		});
@@ -51,9 +51,9 @@ describe(util.f1('scraping'), function() {
 });
 
 
-describe(util.f1('parsing'), function() {
-	describe(util.f2('.time()'), function() {
-		it(util.f3('should parse time'), function() {
+describe(util.f1('parsing'), () => {
+	describe(util.f2('.time()'), () => {
+		it(util.f3('should parse time'), () => {
 			let parsed;
 			parsed = parsingUtils.time('12 minutes');
 			assert(parsed.minutes === 12);
@@ -62,7 +62,7 @@ describe(util.f1('parsing'), function() {
 			assert(parsed.minutes === 12);
 		});
 
-		it(util.f3('should throw errors'), function() {
+		it(util.f3('should throw errors'), () => {
 			assert.throws(() => {
 				parsingUtils.time('12');
 			});
@@ -74,23 +74,23 @@ describe(util.f1('parsing'), function() {
 });
 
 
-describe(util.f1('feed'), function() {
-	describe(util.f2('.process_feed()'), function() {
-		it(util.f3('should work'), function(done) {
+describe(util.f1('feed'), () => {
+	describe(util.f2('.processFeed()'), () => {
+		it(util.f3('should work'), (done) => {
 			const feedparser = new FeedParser();
 			fs.createReadStream('test/files/feed.xml')
 				.pipe(feedparser);
 
-			feedUtils.process_feed(
+			feedUtils.processFeed(
 				feedparser, {
-					seen_guids: ['1111'],
-					seen_pubdate: undefined
+					seenGuids: ['1111'],
+					seenPubdate: undefined
 				},
-				function(err, result) {
+				(err, result) => {
 					if (err) { throw err; }
 					assert(result.items.length === 3);
-					assert(result.new_items.length === 2);
-					assert(result.new_items.indexOf('1111') === -1);
+					assert(result.newItems.length === 2);
+					assert(result.newItems.indexOf('1111') === -1);
 					done();
 				}
 			);
@@ -99,6 +99,6 @@ describe(util.f1('feed'), function() {
 });
 
 
-describe(util.f1('formatting'), function() {
+describe(util.f1('formatting'), () => {
 	// TODO: write tests
 });

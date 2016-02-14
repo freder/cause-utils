@@ -1,22 +1,21 @@
 'use strict';
 
-var debug = require('debug')('cause-utils:scraping');
-var cheerio = require('cheerio');
-var ua = require('random-useragent');
+const debug = require('debug')('cause-utils:scraping');
+const cheerio = require('cheerio');
+const ua = require('random-useragent');
 
 
-function query(method, selector, html) {
-	method = method || 'css';
-
-	var $ = cheerio.load(html);
-	var $result;
+const query = module.exports.query =
+function query(method='css', selector, html) {
+	const $ = cheerio.load(html);
+	let $result;
 
 	switch (method) {
 		case 'css':
 			$result = $(selector);
 			break;
 		case 'jquery':
-			$result = eval(selector);
+			$result = eval(selector); // TODO: don't use `eval()`
 			break;
 		default:
 			debug('unknown query method: '+method);
@@ -24,14 +23,15 @@ function query(method, selector, html) {
 	}
 
 	return $result;
-}
+};
 
 
+const requestDefaults = module.exports.requestDefaults =
 function requestDefaults() {
-	var defaults = {};
+	let defaults = {};
 
 	try {
-		var userAgent = ua.getRandom(function(agent) {
+		const userAgent = ua.getRandom((agent) => {
 			return agent.browserName.toLowerCase() === 'chrome'
 				&& parseFloat(agent.browserVersion) >= 30;
 		});
@@ -42,9 +42,4 @@ function requestDefaults() {
 	}
 
 	return defaults;
-}
-
-module.exports = {
-	query: query,
-	requestDefaults: requestDefaults
 };

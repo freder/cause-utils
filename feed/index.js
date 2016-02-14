@@ -1,49 +1,45 @@
 'use strict';
 
-var _ = require('lodash');
-var debug = require('debug')('cause-utils:feed');
+const _ = require('lodash');
+const debug = require('debug')('cause-utils:feed');
 
 
-function process_feed(feedparser, opts, done) {
-	var meta;
-	var new_items;
-	feedparser.on('meta', function(metadata) {
+const processFeed = module.exports.processFeed =
+function processFeed(feedparser, opts, done) {
+	let meta;
+	let newItems;
+	feedparser.on('meta', (metadata) => {
 		meta = metadata;
-		new_items = {};
+		newItems = {};
 	});
 
-	var guids = [];
-	var all_items = [];
+	let guids = [];
+	let allItems = [];
 	feedparser.on('readable', function() {
-		if (!_.isEmpty(meta['pubdate']) && meta['pubdate'] === opts.seen_pubdate) {
+		if (!_.isEmpty(meta['pubdate'])
+			&& meta['pubdate'] === opts.seenPubdate) {
 			return;
 		}
 
-		var item;
+		let item;
 		while (item = this.read()) {
 			if (meta['#type'] === 'rss') {
 				// TODO: rename keys
 			}
 
-			if (opts.seen_guids.indexOf(item.guid) === -1) {
-				new_items[item.guid] = item;
+			if (opts.seenGuids.indexOf(item.guid) === -1) {
+				newItems[item.guid] = item;
 			}
 			guids.push(item.guid);
-			all_items.push(item);
+			allItems.push(item);
 		}
 	});
 
-	feedparser.on('end', function() {
+	feedparser.on('end', () => {
 		done(null, {
-			meta: meta,
-			guids: guids,
-			items: all_items,
-			new_items: _.values(new_items)
+			meta, guids,
+			items: allItems,
+			newItems: _.values(newItems)
 		});
 	});
-}
-
-
-module.exports = {
-	process_feed: process_feed
 };

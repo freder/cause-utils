@@ -5,32 +5,35 @@ const numeral = require('numeral');
 const sf = require('sf');
 
 
+const money = module.exports.money =
 function money(x) {
 	return numeral(x).format('0.00');
-}
+};
 
 
-function price(price, options) {
+const price = module.exports.price =
+function price(_price, options) {
 	// options: { currency: 'EUR' }
-	var price = price
+	let formattedPrice = _price
 		.replace(options.currency, '')
 		.replace(' ', '');
 	switch (options.currency) {
 		case 'EUR':
-			price = price.replace('.', '');
-			price = price.replace(',', '.');
+			formattedPrice = formattedPrice.replace('.', '');
+			formattedPrice = formattedPrice.replace(',', '.');
 			break;
 		default:
-			price = price.replace(',', '');
+			formattedPrice = formattedPrice.replace(',', '');
 			break;
 	}
-	return price;
-}
+	return formattedPrice;
+};
 
 
+const delta = module.exports.delta =
 function delta(d) {
-	var arrow = chalk.gray('=');
-	var sign = ' ';
+	const arrow = chalk.gray('=');
+	let sign = ' ';
 	if (d > 0) {
 		arrow = chalk.green('▲');
 		sign = '+';
@@ -40,26 +43,18 @@ function delta(d) {
 		sign = '';
 	}
 	return sf('{0}{1:0.00} {2}', sign, d, arrow);
-}
+};
 
 
+const priceDelta = module.exports.priceDelta =
 function priceDelta(price, prevPrice, task) {
-	var d = delta(price - prevPrice);
-	var message = chalk.green(money(price));
+	const d = delta(price - prevPrice);
+	const message = chalk.green(money(price));
 	return sf('{0} | {1}', cliMsg(task.name, d), message);
-}
+};
 
 
-function cliMsg(prefix, msg) {
-	msg = msg || '';
-	return sf('{0} {1}', chalk.bgBlue(prefix), msg);
-}
-
-
-module.exports = {
-	cliMsg: cliMsg,
-	delta: delta,
-	price: price,
-	priceDelta: priceDelta,
-	money: money
+const cliMsg = module.exports.cliMsg =
+function cliMsg(prefix, msg='') {
+	return `${chalk.bgBlue(prefix)} ${msg}`;
 };
