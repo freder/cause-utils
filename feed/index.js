@@ -5,7 +5,7 @@ const debug = require('debug')('cause-utils:feed');
 
 
 const processFeed = module.exports.processFeed =
-function processFeed(feedparser, opts, done) {
+function processFeed(feedparser, options, done) {
 	let meta;
 	let newItems;
 	feedparser.on('meta', (metadata) => {
@@ -17,7 +17,7 @@ function processFeed(feedparser, opts, done) {
 	let allItems = [];
 	feedparser.on('readable', function() {
 		if (!_.isEmpty(meta['pubdate'])
-			&& meta['pubdate'] === opts.seenPubdate) {
+			&& meta['pubdate'] === options.seenPubdate) {
 			return;
 		}
 
@@ -27,7 +27,7 @@ function processFeed(feedparser, opts, done) {
 				// TODO: rename keys
 			}
 
-			if (opts.seenGuids.indexOf(item.guid) === -1) {
+			if (options.seenGuids.indexOf(item.guid) === -1) {
 				newItems[item.guid] = item;
 			}
 			guids.push(item.guid);

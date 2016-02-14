@@ -19,8 +19,9 @@ function price(_price, options) {
 		.replace(' ', '');
 	switch (options.currency) {
 		case 'EUR':
-			formattedPrice = formattedPrice.replace('.', '');
-			formattedPrice = formattedPrice.replace(',', '.');
+			formattedPrice = formattedPrice
+				.replace('.', '')
+				.replace(',', '.');
 			break;
 		default:
 			formattedPrice = formattedPrice.replace(',', '');
@@ -48,9 +49,9 @@ function delta(d) {
 
 const priceDelta = module.exports.priceDelta =
 function priceDelta(price, prevPrice, task) {
-	const d = delta(price - prevPrice);
+	const deltaStr = delta(price - prevPrice);
 	const message = chalk.green(money(price));
-	return sf('{0} | {1}', cliMsg(task.name, d), message);
+	return `${cliMsg(task.name, deltaStr)} | ${message}`;
 };
 
 
