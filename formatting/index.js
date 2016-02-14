@@ -5,6 +5,12 @@ const numeral = require('numeral');
 const sf = require('sf');
 
 
+const list = module.exports.list =
+function list(l) {
+	return l.join('\n');
+};
+
+
 const money = module.exports.money =
 function money(x) {
 	return numeral(x).format('0.00');
