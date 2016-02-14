@@ -1,6 +1,6 @@
 {
   "name": "cause-utils",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "utility functions for ’cause",
   "main": "index.js",
   "license": "CC-BY-NC-SA-4.0",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "feedparser": "^1.1.4",
-  	"babel-plugin-transform-es2015-parameters": "^6.5.0"
+    "babel-plugin-transform-es2015-parameters": "^6.5.0"
   },
   "repository": {
     "type": "git",
