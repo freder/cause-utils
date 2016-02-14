@@ -3,6 +3,7 @@
   "version": "0.0.5",
   "description": "utility functions for ’cause",
   "main": "index.js",
+  "license": "CC-BY-NC-SA-4.0",
   "scripts": {
     "test": "mocha --watch",
     "lint": "eslint index.js test/*.js task/*.js scraping/*.js feed/*.js parsing/*.js formatting/*.js "
