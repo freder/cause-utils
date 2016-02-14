@@ -1,2 +1,6 @@
+--compilers js:babel-register
 --colors
+--watch
+--growl
+
 test/tests.js
