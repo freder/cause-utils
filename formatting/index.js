@@ -32,7 +32,7 @@ function price(_price, options) {
 
 const delta = module.exports.delta =
 function delta(d) {
-	const arrow = chalk.gray('=');
+	let arrow = chalk.gray('=');
 	let sign = ' ';
 	if (d > 0) {
 		arrow = chalk.green('▲');
