@@ -61,7 +61,35 @@ function priceDelta(price, prevPrice, task) {
 };
 
 
+// —————————————
+
+
+const blockName = module.exports.blockName =
+function blockName(name) {
+	return `${chalk.bgMagenta.white(name)}`;
+};
+
+
+const taskName = module.exports.taskName =
+function taskName(name) {
+	return `${chalk.bgBlue.white(name)}`;
+};
+
+
 const cliMsg = module.exports.cliMsg =
 function cliMsg(prefix, msg='') {
 	return `${chalk.bgBlue(prefix)} ${msg}`;
+};
+
+
+const taskMsg = module.exports.taskMsg =
+function taskMsg(task, msg='') {
+	return `${cliMsg(taskName(task.name))} ${msg}`;
+};
+
+
+const stepMsg = module.exports.stepMsg =
+function stepMsg(task, step, msg='') {
+	const prefix = `${taskName(task.name)} ${step.block}`;
+	return `${cliMsg(prefix)} ${msg}`;
 };
