@@ -6,10 +6,10 @@ const fs = require('fs');
 
 const util = require('./util.js');
 
-const scrapingUtils = require('../scraping/index.js');
-const feedUtils = require('../feed/index.js');
-const parsingUtils = require('../parsing/index.js');
-// const formattingUtils = require('../formatting/index.js');
+const scrapingUtils = require('../src/scraping/index.js');
+const feedUtils = require('../src/feed/index.js');
+const parsingUtils = require('../src/parsing/index.js');
+// const formattingUtils = require('../src/formatting/index.js');
 
 
 describe(util.f1('scraping'), () => {

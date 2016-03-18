@@ -2,11 +2,13 @@
   "name": "cause-utils",
   "version": "0.1.1",
   "description": "utility functions for ’cause",
-  "main": "index.js",
+  "main": "dist",
   "license": "CC-BY-NC-SA-4.0",
   "scripts": {
+  	"prepublish": "npm run compile",
+  	"compile": "babel -d dist src",
     "test": "mocha --watch",
-    "lint": "eslint index.js test/*.js scraping/*.js feed/*.js parsing/*.js formatting/*.js "
+    "lint": "eslint src"
   },
   "author": "freder.code@gmail.com",
   "dependencies": {
