@@ -1,8 +1,6 @@
 'use strict';
 
 const assert = require('assert');
-const _ = require('lodash');
-const cheerio = require('cheerio');
 const FeedParser = require('feedparser');
 const fs = require('fs');
 
@@ -11,7 +9,7 @@ const util = require('./util.js');
 const scrapingUtils = require('../scraping/index.js');
 const feedUtils = require('../feed/index.js');
 const parsingUtils = require('../parsing/index.js');
-const formattingUtils = require('../formatting/index.js');
+// const formattingUtils = require('../formatting/index.js');
 
 
 describe(util.f1('scraping'), () => {
@@ -22,7 +20,6 @@ describe(util.f1('scraping'), () => {
 					<div class="div">div</div> \
 					<span>span</span> \
 				</div>';
-			const $ = cheerio.load(html);
 			let query, $result;
 
 			query = '$("#container div").first()';
