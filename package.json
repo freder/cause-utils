@@ -1,12 +1,12 @@
 {
   "name": "cause-utils",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "utility functions for ’cause",
   "main": "dist",
   "license": "CC-BY-NC-SA-4.0",
   "scripts": {
-  	"prepublish": "npm run compile",
-  	"compile": "babel -d dist src",
+    "prepublish": "npm run compile",
+    "compile": "babel -d dist src",
     "test": "mocha --watch",
     "lint": "eslint src"
   },
